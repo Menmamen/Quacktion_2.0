@@ -1,11 +1,16 @@
 <?php
 session_start();
 include_once("mysql.php");
-$username = "";
 
-if (isset($_SESSION['username'])) {
-    $username = htmlspecialchars($_SESSION['username']);
+// Verificar si la sesión contiene el nombre de usuario
+if (!isset($_SESSION['username'])) {
+    echo "<p style='color: red;'>No hay sesión iniciada.</p>";
+} else {
+    echo "<p style='color: green;'>" . "</p>";
 }
+
+// Asignar el nombre de usuario si la sesión está iniciada
+$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : "";
 ?>
 
 <!doctype html>
@@ -52,13 +57,13 @@ if (isset($_SESSION['username'])) {
     <div class="container">
         <?php if ($username): ?>
             <div class="bienvenida">
-                <i class="bi bi-person"></i> Bienvenido <?php echo $username; ?>
+                <i class="bi bi-person"></i> Bienvenido, <?php echo $username; ?>!
             </div>
         <?php endif; ?>
         <main class="form-signin m-auto">
             <div class="main-buttons">
-                <a href="index.php" class="btn btn-primary btn-lg">Iniciar Sesión</a>
-                <a href="crearCuenta.php" class="btn btn-success btn-lg">Jugar como Invitado</a>
+                <a href="jugarPartida.php" class="btn btn-primary btn-lg">Iniciar Partida</a>
+                <a href="invitado.php" class="btn btn-success btn-lg">Jugar como Invitado</a>
             </div>
         </main>
     </div>

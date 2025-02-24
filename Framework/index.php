@@ -3,14 +3,37 @@ session_start();
 $mensaje = "";
 $msgClass = "";
 
+require_once 'mysql.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
-        // Aquí deberías validar el usuario y la contraseña
-        // Si la validación es correcta, almacena el nombre de usuario en la sesión
-        $_SESSION['username'] = $_POST['username'];
-        // Redirige a main.php después de iniciar sesión
-        header("Location: main.php");
-        exit();
+        $con = mysqli_connect($domain, $usuario, $pword, $database, $port);
+        if (!$con) {
+            die("Error en la conexión: " . mysqli_connect_error());
+        }
+
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $password = $_POST['password'];
+
+        $sql = "SELECT * FROM Usuario WHERE nombre_usuario = '$username'";
+        $result = mysqli_query($con, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['username'] = $username;
+                header("Location: sesionIniciada.php");
+                exit();
+            } else {
+                $mensaje = "Contraseña incorrecta.";
+                $msgClass = "error-message";
+            }
+        } else {
+            $mensaje = "Nombre de usuario no encontrado.";
+            $msgClass = "error-message";
+        }
+
+        mysqli_close($con);
     } else {
         $mensaje = "Por favor, ingrese el nombre de usuario y la contraseña.";
         $msgClass = "error-message";
@@ -58,16 +81,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
         <form method="post" action="index.php">
-            <img class="mb-4 mx-auto d-block" src="/img/racoon-pedro.gif" alt="" width="85" height="85">
             <h1 class="h3 mb-3 fw-normal">Inicia sesión para continuar</h1>
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario" required>
                 <label for="floatingInput">Usuario</label>
             </div>
 
             <div class="form-floating">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 <label for="floatingPassword">Contraseña</label>
             </div>
 
@@ -78,8 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </label>
             </div>
             <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
         </form>
+        <form method="get" action="crearCuenta.php">
+            <button class="btn btn-secondary w-100 py-2 mt-2" type="submit">Crear Cuenta</button>
+        </form>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
     </main>
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
