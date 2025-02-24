@@ -2,7 +2,7 @@
 $domain = "localhost";
 $usuario = "root";
 $pword = "";
-$database = "world";
+$database = "Quacktion";
 $port = 3306;
 
 function consultar($consulta)

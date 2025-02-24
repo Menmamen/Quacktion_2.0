@@ -7,17 +7,14 @@ if (isset($_SESSION['username'])) {
     $username = htmlspecialchars($_SESSION['username']);
 }
 // Realizamos una consulta a la base de datos
-$query = "SELECT `Code`,`Name`,`Continent` FROM `country` ORDER BY Name ASC";
+$query = "SELECT `nombre_usuario`, `password`, `correo` FROM `Usuario` ORDER BY `nombre_usuario` ASC";
 $listCountry = consultar($query);
-
 ?>
-
 
 <!doctype html>
 <html lang="es">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -79,40 +76,31 @@ $listCountry = consultar($query);
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <div class="container">
 
-        <div class="button-container">
-            <form action="nuevo.php">
-                <button type="submit" class="btn btn-primary">Nuevo País</button>
-            </form>
-            <div class="bienvenida">
-                <i class="bi bi-person"></i> Bienvenido <?php echo $username; ?>
-            </div>
+        <div class="bienvenida">
+            <i class="bi bi-person"></i> Bienvenido <?php echo $username; ?>
         </div>
         <main class="form-signin m-auto">
             <table>
                 <tr>
-                    <td>Nombre</td>
-                    <td>Código</td>
-                    <td>Continente</td>
+                    <td>Nombre de Usuario</td>
+                    <td>Password</td>
+                    <td>Correo</td>
                 </tr>
                 <?php
-
                 // Mostramos los datos obtenidos desde la consulta
-
                 if ($listCountry != null) {
-
                     foreach ($listCountry as $objCountry) {
                         echo "<tr>";
-                        echo "<td>$objCountry[Name]</td>";
-                        echo "<td>$objCountry[Code]</td>";
-                        echo "<td>$objCountry[Continent]</td>";
+                        echo "<td>$objCountry[nombre_usuario]</td>";
+                        echo "<td>$objCountry[password]</td>";
+                        echo "<td>$objCountry[correo]</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "Nos hemos encontrado ningun registro para la consulta ejecutada.";
+                    echo "No se ha encontrado ningún registro para la consulta ejecutada.";
                 }
                 ?>
             </table>
-
         </main>
         <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     </div>
