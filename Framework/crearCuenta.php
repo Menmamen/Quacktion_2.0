@@ -45,56 +45,168 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Crear Cuenta</title>
     <link href="/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: rgba(16, 47, 49, 0.9) url("./img/geese-removebg-preview.png") repeat;
+            background-size: 150px;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container-login {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #102F31;
+        }
+
+        .form-control {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #1E6063;
+            outline: none;
+            box-shadow: 0 0 5px rgba(30, 96, 99, 0.5);
+        }
+
+        .btn-custom {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            text-align: center;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #1E6063;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .btn-secondary {
+            background: #205E5F;
+        }
+
+        .btn-custom:hover {
+            filter: brightness(1.2);
+        }
+
+        .error-message,
         .success-message {
-            background-color: #d4edda;
-            color: rgba(36, 173, 68, 0.49);
-            border: 1px solid #c3e6cb;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
         }
 
         .error-message {
-            background-color: #f8d7da;
-            color: rgba(135, 28, 38, 0.47);
-            border: 1px solid #f5c6cb;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+            background: rgba(201, 67, 67, 0.7);
+            color: white;
+        }
+
+        .success-message {
+            background: rgba(67, 201, 67, 0.7);
+            color: white;
+        }
+
+        .text-body-secondary {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .icon-user {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 50%;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer div {
+            color: white;
+            font-size: 15px;
         }
     </style>
 </head>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="form-signin m-auto">
-        <!-- Mostrar mensaje -->
+<body>
+    <div class="container-login">
+        <!-- Icono centrado arriba -->
+        <img src="./img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
+
         <?php if ($mensaje): ?>
             <div class="<?php echo htmlspecialchars($msgClass); ?>">
                 <?php echo htmlspecialchars($mensaje); ?>
             </div>
         <?php endif; ?>
-        <form method="post" action="">
-            <h1 class="h3 mb-3 fw-normal">Crear una cuenta</h1>
 
-            <div class="form-floating">
+        <form method="post" action="">
+            <h1>Crear Cuenta</h1>
+
+            <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Nombre de Usuario" required>
                 <label for="nombre_usuario">Nombre de Usuario</label>
             </div>
 
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                 <label for="password">Contraseña</label>
             </div>
 
-            <div class="form-floating">
+            <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo Electrónico" required>
                 <label for="correo">Correo Electrónico</label>
             </div>
 
-            <button class="btn btn-primary w-100 py-2" type="submit">Crear Cuenta</button>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+            <button class="btn btn-custom btn-primary" type="submit">Crear Cuenta</button>
         </form>
-    </main>
+
+        <form method="get" action="index.php">
+            <button class="btn btn-custom btn-secondary mt-2" type="submit">Volver al login</button>
+        </form>
+
+        <p class="mt-4 text-body-secondary">&copy; 2025 Quacktion</p>
+    </div>
+    <footer id="pie">
+        <div>Contacto</div>
+        <div>|</div>
+        <div>Política de privacidad</div>
+        <div>|</div>
+        <div>Ajustes</div>
+        <div>|</div>
+        <div>Quacktion 2025</div>
+    </footer>
+
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
