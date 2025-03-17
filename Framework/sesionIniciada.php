@@ -1,16 +1,11 @@
 <?php
 session_start();
 include_once("mysql.php");
+$username = "";
 
-// Verificar si la sesión contiene el nombre de usuario
-if (!isset($_SESSION['username'])) {
-    echo "<p style='color: red;'>No hay sesión iniciada.</p>";
-} else {
-    echo "<p style='color: green;'>" . "</p>";
+if (isset($_SESSION['username'])) {
+    $username = htmlspecialchars($_SESSION['username']);
 }
-
-// Asignar el nombre de usuario si la sesión está iniciada
-$username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : "";
 ?>
 
 <!doctype html>
