@@ -1,9 +1,7 @@
 <?php
 
 function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad = null, $tipo = null) {
-    // Mapeo de categorías en español → ID de OpenTDB
-
-
+    // Mapeo de categorías en → ID de OpenTDB
     $categorias = [
         "General Knowledge" => 9, "Entertainment: Books" => 10, "Entertainment: Books" => 11, "Entertainment: Music" => 12, "Entertainment: Musicals & Theatres" => 13,
         "Entertainment: Television" => 14, "Entertainment: Video Games" => 15, "Entertainment: Board Games" => 16, "Science & Nature" => 17,
@@ -63,7 +61,7 @@ function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad =
 }
 
 //Ejemplo:
-$preguntas = obtenerPreguntasTrivia(5, "Entertainment: Video Games", "medium", "verdadero_falso");
+$preguntas = obtenerPreguntasTrivia(20, "", "", "");
 
 if (isset($preguntas["error"])) {
     echo "<p>Error: " . $preguntas["error"] . "</p>";
