@@ -10,7 +10,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #102F31;
+            background: rgba(16, 47, 49, 0.9) url("../../geese-removebg-preview.png") repeat;
+            background-size: 150px;
             color: white;
             margin: 0;
             padding: 0;
@@ -18,9 +19,6 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-/*             background-image: url("../../fondo.png");
-            background-repeat: repeat;
-            background-size: 100px; */
         }
 
         #logo {
@@ -49,7 +47,7 @@
         #ranking,
         #botones,
         #tutorial {
-            background-color: rgba(255, 255, 255, 0.1); 
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
             justify-content: center;
@@ -87,13 +85,14 @@
             position: fixed;
             bottom: 0;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.2); 
+            background-color: rgba(255, 255, 255, 0.2);
             width: 100%;
             text-align: center;
             display: flex;
             justify-content: center;
             gap: 20px;
         }
+
         footer div {
             color: white;
             font-size: 15px;
@@ -136,7 +135,7 @@
             <button id="salir">Iniciar sesión</button>
         </div>
         <div id="tutorial"></div>
-    </div>
+
     <footer id="pie">
         <div>Contacto</div>
         <div>|</div>
