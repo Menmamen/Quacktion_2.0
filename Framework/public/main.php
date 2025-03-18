@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("mysql.php");
+include_once("../src/scripts/mysql.php");
 $username = "";
 
 if (isset($_SESSION['username'])) {
@@ -29,7 +29,7 @@ if (isset($_SESSION['username'])) {
 
         body {
             font-family: Arial, sans-serif;
-            background: rgba(16, 47, 49, 0.9) url("../../public/assets/img/geese-removebg-preview.png") repeat;
+            background: rgba(16, 47, 49, 0.9) url("./assets/img/geese-removebg-preview.png") repeat;
             background-size: 150px;
             color: white;
             margin: 0;
@@ -156,13 +156,13 @@ if (isset($_SESSION['username'])) {
         <?php endif; ?>
 
         <div id="logo">
-            <img src="../../public/assets/img/quacktion.jpg" alt="logo">
+            <img src="./assets/img/quacktion.jpg" alt="logo">
         </div>
 
         <div id="cuerpo">
             <div id="botones">
-                <a href="../../public/index.php" id="invitados">Iniciar Sesión</a>
-                <a href="/Framework/src/scripts/crearCuenta.php" id="salir">Jugar como Invitado</a>
+                <a href="/Framework/src/scripts/index.php" id="invitados">Iniciar Sesión</a>
+                <a href="/Framework/src/scripts/invitado.php" id="salir">Jugar como Invitado</a>
             </div>
         </div>
     </div>
