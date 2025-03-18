@@ -26,6 +26,10 @@
             flex-direction: column;
             align-items: center;
         }
+        .sidebar img {
+            border-radius: 50%; /* Hace que la imagen sea circular */
+            margin-bottom: 20px;
+        }
         .ruleta-container {
             position: relative;
             width: 350px;
@@ -66,7 +70,7 @@
             position: absolute;
             top: -30px; /* La punta apunta a la ruleta */
             left: 50%;
-            transform: translateX(-50%) ; /* Flecha invertida */
+            transform: translateX(-50%); /* Flecha centrada */
             width: 0;
             height: 0;
             border-left: 15px solid transparent;
@@ -74,8 +78,8 @@
             border-top: 30px solid white; /* Flecha invertida correctamente */
         }
 
-        .btn{
-            background-color: #F3F3F3 ;
+        .btn {
+            background-color: #F3F3F3;
         }
     </style>
 </head>
@@ -83,7 +87,7 @@
 
     <!-- Menú lateral -->
     <div class="sidebar">
-        <img src="./img/quacktion.jpg" alt="Quacktion" width="80" >
+        <img src="/Framework/public/assets/img/quacktion.jpg" alt="Quacktion" width="80">
         <button class="btn btn-light my-2 rounded-5 border-dark">Inicio</button>
         <button class="btn btn-light my-2 rounded-5 border-dark">Log in</button>
         <button class="btn btn-light my-2 rounded-5 border-dark">Nueva Partida</button>
@@ -101,7 +105,7 @@
 
     <div id="resultado"></div>
 
-    <script src="./plugins/scripts/tablero.js"> </script>
+    <script src="./tablero.js"></script>
 
 </body>
 </html>
