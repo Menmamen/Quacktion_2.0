@@ -73,17 +73,21 @@
             border-right: 15px solid transparent;
             border-top: 30px solid white; /* Flecha invertida correctamente */
         }
+
+        .btn{
+            background-color: #F3F3F3 ;
+        }
     </style>
 </head>
 <body>
 
     <!-- Menú lateral -->
     <div class="sidebar">
-        <img src="./img/quacktion.jpg" alt="Quacktion" width="80">
-        <button class="btn btn-light my-2 rounded-5">Inicio</button>
-        <button class="btn btn-light my-2 rounded-5">Log in</button>
-        <button class="btn btn-light my-2 rounded-5">Nueva Partida</button>
-        <button class="btn btn-light my-2 rounded-5">Reiniciar Partida</button>
+        <img src="./img/quacktion.jpg" alt="Quacktion" width="80" >
+        <button class="btn btn-light my-2 rounded-5 border-dark">Inicio</button>
+        <button class="btn btn-light my-2 rounded-5 border-dark">Log in</button>
+        <button class="btn btn-light my-2 rounded-5 border-dark">Nueva Partida</button>
+        <button class="btn btn-light my-2 rounded-5 border-dark">Reiniciar Partida</button>
     </div>
 
     <!-- Ruleta -->
