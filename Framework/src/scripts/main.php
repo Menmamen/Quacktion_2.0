@@ -161,8 +161,8 @@ if (isset($_SESSION['username'])) {
 
         <div id="cuerpo">
             <div id="botones">
-                <a href="index.php" id="invitados">Iniciar Sesión</a>
-                <a href="crearCuenta.php" id="salir">Jugar como Invitado</a>
+                <a href="../../public/index.php" id="invitados">Iniciar Sesión</a>
+                <a href="/Framework/src/scripts/crearCuenta.php" id="salir">Jugar como Invitado</a>
             </div>
         </div>
     </div>

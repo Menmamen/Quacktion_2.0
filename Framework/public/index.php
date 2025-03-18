@@ -3,7 +3,7 @@ session_start();
 $mensaje = "";
 $msgClass = "";
 
-require_once 'mysql.php';
+require_once '../src/scripts/mysql.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($result);
             if (password_verify($password, $row['password'])) {
                 $_SESSION['username'] = $username;
-                header("Location: sesionIniciada.php");
+                header("Location: /Framework/src/scripts/sesionIniciada.php");
                 exit();
             } else {
                 $mensaje = "Contraseña incorrecta.";
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button class="btn btn-custom btn-primary" type="submit">Iniciar sesión</button>
         </form>
 
-        <form method="get" action="crearCuenta.php">
+        <form method="get" action="/Framework/src/scripts/crearCuenta.php">
             <button class="btn btn-custom btn-secondary mt-2" type="submit">Crear Cuenta</button>
         </form>
 
