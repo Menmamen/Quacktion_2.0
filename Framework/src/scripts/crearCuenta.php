@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button class="btn btn-custom btn-primary" type="submit">Crear Cuenta</button>
         </form>
 
-        <form method="get" action="index.php">
+        <form method="get" action="/Framework/public/index.php">
             <button class="btn btn-custom btn-secondary mt-2" type="submit">Volver al login</button>
         </form>
 
