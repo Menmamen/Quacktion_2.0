@@ -3,7 +3,7 @@ session_start();
 $mensaje = "";
 $msgClass = "";
 
-require_once '../src/scripts/mysql.php';
+require_once 'mysql.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -75,13 +75,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
         }
 
         h1 {
             margin-bottom: 20px;
             color: #102F31;
+        }
+
+        .form-group {
+            display: flex;
+            width: 100%;
+            /* Aseguramos que el contenedor ocupe todo el ancho */
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0 10px;
         }
 
         .form-control {
@@ -95,8 +111,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 5px rgba(30, 96, 99, 0.5);
         }
 
+        .form-floating .form-control {
+            border-radius: 10px;
+            padding-left: 15px;
+            height: 25px;
+        }
+
+        .form-floating>label {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #1E6063;
+        }
+
+        .form-check {
+            display: flex;
+            justify-content: right;
+            margin-right: 2px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+        }
+
         .btn-custom {
-            width: 100%;
+            width: 75%;
             padding: 12px;
             border-radius: 8px;
             font-weight: bold;
@@ -115,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .btn-secondary {
             background: #205E5F;
+            margin-bottom: 20px;
         }
 
         .btn-custom:hover {
@@ -149,8 +188,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 100px;
             object-fit: cover;
             margin-bottom: 10px;
-            border-radius: 50%; 
+            border-radius: 50%;
         }
+
         footer {
             position: fixed;
             bottom: 0;
@@ -174,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container-login">
         <!-- Icono centrado arriba -->
-        <img src="./img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
+        <img src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
 
         <?php if ($mensaje): ?>
             <div class="<?php echo htmlspecialchars($msgClass); ?>">
@@ -185,14 +225,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" action="index.php">
             <h1>Iniciar Sesión</h1>
 
-            <div class="form-floating mb-3">
+            <div class="form-group mb-3">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario" required>
-                <label for="username">Usuario</label>
             </div>
 
-            <div class="form-floating mb-3">
+            <div class="form-group mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
-                <label for="password">Contraseña</label>
             </div>
 
             <div class="form-check text-start my-3">

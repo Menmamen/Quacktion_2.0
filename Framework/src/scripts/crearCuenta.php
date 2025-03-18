@@ -82,8 +82,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 5px rgba(30, 96, 99, 0.5);
         }
 
-        .btn-custom {
+        .form-floating {
+            display: flex;
             width: 100%;
+            /* Aseguramos que el contenedor ocupe todo el ancho */
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-floating input {
+            width: 100%;
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0 10px;
+        }
+
+        .btn-custom {
+            width: 75%;
             padding: 12px;
             border-radius: 8px;
             font-weight: bold;
@@ -162,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container-login">
         <!-- Icono centrado arriba -->
-        <img src="./img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
+        <img src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
 
         <?php if ($mensaje): ?>
             <div class="<?php echo htmlspecialchars($msgClass); ?>">
@@ -175,23 +191,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Nombre de Usuario" required>
-                <label for="nombre_usuario">Nombre de Usuario</label>
             </div>
 
             <div class="form-floating mb-3">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
-                <label for="password">Contraseña</label>
             </div>
 
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo Electrónico" required>
-                <label for="correo">Correo Electrónico</label>
             </div>
 
             <button class="btn btn-custom btn-primary" type="submit">Crear Cuenta</button>
         </form>
 
-        <form method="get" action="/Framework/public/index.php">
+        <form method="get" action="index.php">
             <button class="btn btn-custom btn-secondary mt-2" type="submit">Volver al login</button>
         </form>
 
