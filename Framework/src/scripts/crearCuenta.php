@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: rgba(16, 47, 49, 0.9) url("./img/geese-removebg-preview.png") repeat;
+            background: rgba(16, 47, 49, 0.9) url("../../public/assets/img/geese-removebg-preview.png") repeat;
             background-size: 150px;
             color: black;
             display: flex;

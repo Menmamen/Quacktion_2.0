@@ -29,7 +29,7 @@ if (isset($_SESSION['username'])) {
 
         body {
             font-family: Arial, sans-serif;
-            background: rgba(16, 47, 49, 0.9) url("./img/geese-removebg-preview.png") repeat;
+            background: rgba(16, 47, 49, 0.9) url("../../public/assets/img/geese-removebg-preview.png") repeat;
             background-size: 150px;
             color: white;
             margin: 0;
@@ -156,7 +156,7 @@ if (isset($_SESSION['username'])) {
         <?php endif; ?>
 
         <div id="logo">
-            <img src="./img/quacktion.jpg" alt="logo">
+            <img src="../../public/assets/img/quacktion.jpg" alt="logo">
         </div>
 
         <div id="cuerpo">
