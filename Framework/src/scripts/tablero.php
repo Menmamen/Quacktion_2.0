@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             height: 100vh;
             flex-direction: column;
         }
+
         .sidebar {
             background-color: #678;
             padding: 20px;
@@ -26,21 +28,26 @@
             flex-direction: column;
             align-items: center;
         }
+
         .sidebar img {
-            border-radius: 50%; /* Hace que la imagen sea circular */
+            border-radius: 50%;
+            /* Hace que la imagen sea circular */
             margin-bottom: 20px;
         }
+
         .ruleta-container {
             position: relative;
             width: 350px;
             height: 350px;
         }
+
         .ruleta {
             width: 100%;
             height: 100%;
             transform-origin: center;
             transition: transform 3s ease-out;
         }
+
         .boton-girar {
             position: absolute;
             top: 50%;
@@ -58,24 +65,30 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             border: none;
         }
+
         .boton-girar:hover {
             background: #ddd;
         }
+
         #resultado {
             margin-top: 20px;
             font-size: 20px;
         }
+
         /* Flecha indicadora */
         .flecha {
             position: absolute;
-            top: -30px; /* La punta apunta a la ruleta */
+            top: -30px;
+            /* La punta apunta a la ruleta */
             left: 50%;
-            transform: translateX(-50%); /* Flecha centrada */
+            transform: translateX(-50%);
+            /* Flecha centrada */
             width: 0;
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-top: 30px solid white; /* Flecha invertida correctamente */
+            border-top: 30px solid white;
+            /* Flecha invertida correctamente */
         }
 
         .btn {
@@ -83,6 +96,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Menú lateral -->
@@ -108,4 +122,5 @@
     <script src="./tablero.js"></script>
 
 </body>
+
 </html>

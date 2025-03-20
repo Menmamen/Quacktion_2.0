@@ -1,5 +1,5 @@
 "use strict"
-
+const numPretuntas = 20;
 const ruleta = document.getElementById('ruleta');
         const resultado = document.getElementById('resultado');
 
@@ -8,7 +8,7 @@ const ruleta = document.getElementById('ruleta');
             { color: '#64B5F6', nombre: 'Geografía', icono: '🌍' },
             { color: '#81C784', nombre: 'Ciencia', icono: '🔬' },
             { color: '#FFD54F', nombre: 'Entretenimiento', icono: '🎭' },
-            { color: '#FF8A65', nombre: 'Deportes', icono: '⚽' },
+            { color: '#FF8A65', nombre: 'Conocimiento general', icono: '⚽' },
             { color: '#BA68C8', nombre: 'Arte y Literatura', icono: '📖' }
         ];
 
@@ -58,9 +58,70 @@ const ruleta = document.getElementById('ruleta');
             setTimeout(() => {
                 const anguloFinal = anguloActual % 360;
                 const segmentoSeleccionado = Math.floor(((360 - anguloFinal) % 360) / (360 / 20));
-                const categoriaSeleccionada = categorias[segmentoSeleccionado % categorias.length];
+                let categoriaSeleccionada = categorias[segmentoSeleccionado % categorias.length];
                 resultado.innerText = `Categoría: ${categoriaSeleccionada.nombre}`;
+                //console.log(categoriaSeleccionada.nombre);
             }, 3000);
+
+            //Prueba
+            return resultado.innerText;
+        }
+        function jugar(){//Lógica de juego
+            let correctas = 0;
+            let incorrectas = 0;
+            let categoria = resultado.innerText;
+            let continuar = true;
+
+            while (continuar) {
+                
+
+            }
+        }
+        async function obtenerPreguntasTrivia(cantidad = 1, categoria = null, dificultad = null, tipo = null) {
+            const categorias = {
+                "General Knowledge": 9, "Entertainment: Books": 10, "Entertainment: Films": 11, "Entertainment: Music": 12,
+                "Entertainment: Musicals & Theatres": 13, "Entertainment: Television": 14, "Entertainment: Video Games": 15,
+                "Entertainment: Board Games": 16, "Science & Nature": 17, "Science: Computers": 18, "Science: Mathematics": 19,
+                "Mythology": 20, "Sports": 21, "Geography": 22, "History": 23, "Politics": 24, "Art": 25, "Celebrities": 26,
+                "Animals": 27, "Vehicles": 28, "Entertainment: Comics": 29, "Science: Gadgets": 30, "Entertainment: Japanese Anime & Manga": 31,
+                "Entertainment: Cartoon & Animations": 32
+            };
+            
+            const tipos = { "multiple": "multiple", "verdadero_falso": "boolean" };
+            
+            let url = `https://opentdb.com/api.php?amount=${cantidad}&encode=base64`;
+            if (categoria && categorias[categoria]) url += `&category=${categorias[categoria]}`;
+            if (dificultad && ["easy", "medium", "hard"].includes(dificultad)) url += `&difficulty=${dificultad}`;
+            if (tipo && tipos[tipo]) url += `&type=${tipos[tipo]}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.response_code !== 0) {
+                    throw new Error("Error al obtener preguntas de la API");
+                }
+                
+                return data.results.map(pregunta => ({
+                    question: atob(pregunta.question),
+                    correct_answer: atob(pregunta.correct_answer),
+                    incorrect_answers: pregunta.incorrect_answers.map(atob)
+                }));
+            } catch (error) {
+                console.error("Error en la solicitud a la API:", error);
+                return null;
+            }
+        }
+        
+        // Uso de la función
+        // obtenerPreguntasTrivia(2, "Science: Computers", "easy", "multiple").then(console.log);
+        
+        
+        function renderPregunta(){//Función que renderiza la pregunta en el tablero
+
+            
         }
 
         crearRuleta();
+        console.log(girarRuleta());
+        //console.log(obtenerPreguntasTrivia());
