@@ -162,10 +162,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: white;
             font-size: 15px;
         }
+
+        .btn-flotante {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 9999;
+            background-color: transparent;
+            border: none;
+        }
+
+        .btn-flotante img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
+    <a href="/Framework/public/main.php" class="btn-flotante">
+        <img src="/Framework/public/assets/img/quacktion.jpg" alt="Ir a main.php" title="Volver a Inicio">
+    </a>
     <div class="container-login">
         <img src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
 
