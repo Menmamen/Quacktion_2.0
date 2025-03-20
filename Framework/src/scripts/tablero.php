@@ -88,11 +88,11 @@
     <!-- Menú lateral -->
     <div class="sidebar">
         <img src="/Framework/public/assets/img/quacktion.jpg" alt="Quacktion" width="80">
-        <button class="btn btn-light my-2 rounded-5 border-dark">Inicio</button>
-        <button class="btn btn-light my-2 rounded-5 border-dark">Log in</button>
-        <button class="btn btn-light my-2 rounded-5 border-dark">Nueva Partida</button>
+        <a href="/Framework/public/main.php" class="btn btn-light my-2 rounded-5 border-dark">Inicio</a>
+        <a href="./index.php" class="btn btn-light my-2 rounded-5 border-dark">Log in</a>
+        <!-- <button class="btn btn-light my-2 rounded-5 border-dark">Nueva Partida</button>
         <button class="btn btn-light my-2 rounded-5 border-dark">Reiniciar Partida</button>
-    </div>
+   -->  </div>
 
     <!-- Ruleta -->
     <div class="ruleta-container">

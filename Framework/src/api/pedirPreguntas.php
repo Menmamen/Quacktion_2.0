@@ -1,5 +1,6 @@
 <?php
-
+header('Content-Type: application/json'); // Asegura que se devuelve JSON
+echo json_encode(["pregunta" => "¿Cuál es la capital de Francia?"]); // Prueba con esto
 function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad = null, $tipo = null) {
     // Mapeo de categorías en → ID de OpenTDB
     $categorias = [
