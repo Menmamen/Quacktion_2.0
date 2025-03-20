@@ -1,10 +1,15 @@
 <?php
+<<<<<<< HEAD
 header('Content-Type: application/json'); // Asegura que se devuelve JSON
 echo json_encode(["pregunta" => "¿Cuál es la capital de Francia?"]); // Prueba con esto
 function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad = null, $tipo = null) {
+=======
+
+function obtenerPreguntasTrivia($cantidad = 1, $categoria = null, $dificultad = null, $tipo = null) {
+>>>>>>> cbe4457be4395ea2c4f392bf5d50195817bcd04a
     // Mapeo de categorías en → ID de OpenTDB
     $categorias = [
-        "General Knowledge" => 9, "Entertainment: Books" => 10, "Entertainment: Books" => 11, "Entertainment: Music" => 12, "Entertainment: Musicals & Theatres" => 13,
+        "General Knowledge" => 9, "Entertainment: Books" => 10, "Entertainment: Films" => 11, "Entertainment: Music" => 12, "Entertainment: Musicals & Theatres" => 13,
         "Entertainment: Television" => 14, "Entertainment: Video Games" => 15, "Entertainment: Board Games" => 16, "Science & Nature" => 17,
         "Science: Computers" => 18, "Science: Mathematics" => 19, "Mythology" => 20, "Sports" => 21,
         "Geography" => 22, "History" => 23, "Politics" => 24, "Art" => 25, "Celebrities" => 26,
@@ -62,14 +67,14 @@ function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad =
 }
 
 //Ejemplo:
-$preguntas = obtenerPreguntasTrivia(20, "", "", "");
+// $preguntas = obtenerPreguntasTrivia(20, "", "", "");
 
-if (isset($preguntas["error"])) {
-    echo "<p>Error: " . $preguntas["error"] . "</p>";
-} else {
-    echo "<pre>";
-    print_r($preguntas);
-    echo "</pre>";
-}
+// if (isset($preguntas["error"])) {
+//     echo "<p>Error: " . $preguntas["error"] . "</p>";
+// } else {
+//     echo "<pre>";
+//     print_r($preguntas);
+//     echo "</pre>";
+// }
 
-?>
+// ?>
