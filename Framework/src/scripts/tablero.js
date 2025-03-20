@@ -8,7 +8,7 @@ const ruleta = document.getElementById('ruleta');
             { color: '#64B5F6', nombre: 'Geografía', icono: '🌍' },
             { color: '#81C784', nombre: 'Ciencia', icono: '🔬' },
             { color: '#FFD54F', nombre: 'Entretenimiento', icono: '🎭' },
-            { color: '#FF8A65', nombre: 'Conocimiento general', icono: '⚽' },
+            { color: '#FF8A65', nombre: 'Conocimiento general', icono: '🧠' },
             { color: '#BA68C8', nombre: 'Arte y Literatura', icono: '📖' }
         ];
 
@@ -50,6 +50,9 @@ const ruleta = document.getElementById('ruleta');
         let anguloActual = 0;
 
         function girarRuleta() {
+            console.log(resultado.innerText);
+            console.log(asignarCategoria(resultado.innerText));
+
             const giros = Math.floor(Math.random() * 3) + 3;
             const anguloGiro = Math.floor(Math.random() * 360);
             anguloActual += giros * 360 + anguloGiro;
@@ -61,10 +64,15 @@ const ruleta = document.getElementById('ruleta');
                 let categoriaSeleccionada = categorias[segmentoSeleccionado % categorias.length];
                 resultado.innerText = `Categoría: ${categoriaSeleccionada.nombre}`;
                 //console.log(categoriaSeleccionada.nombre);
+                obtenerPreguntasTrivia(1, asignarCategoria(resultado.innerText))
+                .then(preguntas => {
+                    console.log(preguntas); // Aquí puedes hacer algo con las preguntas, como renderizarlas
+                })
+                .catch(error => console.error("Error obteniendo preguntas:", error));
             }, 3000);
 
             //Prueba
-            return resultado.innerText;
+/*             return resultado.innerText; */
         }
         function jugar(){//Lógica de juego
             let correctas = 0;
@@ -125,3 +133,46 @@ const ruleta = document.getElementById('ruleta');
         crearRuleta();
         console.log(girarRuleta());
         //console.log(obtenerPreguntasTrivia());
+
+        function asignarCategoria(catRuleta){
+            let categoria = catRuleta.split(": ")[1];
+            let valorCat;
+            switch (categoria) {
+                case "Historia":
+                    let numHistoria = [23, 24];
+                    valorCat = numHistoria[Math.floor(Math.random() * numHistoria.length)];
+                    break;
+            
+                case "Geografía":
+                    let numGeografia = [22];
+                    valorCat = numGeografia[Math.floor(Math.random() * numGeografia.length)];
+                    break;
+            
+                case "Ciencia":
+                    let numCiencia = [17, 27, 28, 30];
+                    valorCat = numCiencia[Math.floor(Math.random() * numCiencia.length)];
+                    break;
+            
+                case "Entretenimiento":
+                    let numEntretenimiento = [11, 13, 14, 15, 16, 26, 29, 31, 32];
+                    valorCat = numEntretenimiento[Math.floor(Math.random() * numEntretenimiento.length)];
+                    break;
+            
+                case "Conocimiento general":
+                    let numConocimiento = [9];
+                    valorCat = numConocimiento[Math.floor(Math.random() * numConocimiento.length)];
+                    break;
+            
+                case "Arte y Literatura":
+                    let numArte = [10, 12, 25];
+                    valorCat = numArte[Math.floor(Math.random() * numArte.length)];
+                    break;
+            
+                default:
+                    valorCat = 9; // En caso de que la categoría no coincida con ninguna
+                    break;
+            }
+            return valorCat;
+        };
+
+        
