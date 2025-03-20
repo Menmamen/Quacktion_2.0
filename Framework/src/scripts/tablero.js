@@ -85,7 +85,7 @@ const ruleta = document.getElementById('ruleta');
 
             }
         }
-        async function obtenerPreguntasTrivia(cantidad = 1, categoria = null, dificultad = null, tipo = null) {
+        async function obtenerPreguntasTrivia(cantidad = 1, categoria = null, dificultad = null, tipo = "multiple") {
             const categorias = {
                 "General Knowledge": 9, "Entertainment: Books": 10, "Entertainment: Films": 11, "Entertainment: Music": 12,
                 "Entertainment: Musicals & Theatres": 13, "Entertainment: Television": 14, "Entertainment: Video Games": 15,
@@ -113,7 +113,8 @@ const ruleta = document.getElementById('ruleta');
                 return data.results.map(pregunta => ({
                     question: atob(pregunta.question),
                     correct_answer: atob(pregunta.correct_answer),
-                    incorrect_answers: pregunta.incorrect_answers.map(atob)
+                    incorrect_answers: pregunta.incorrect_answers.map(atob),
+                    type: atob(pregunta.type)
                 }));
             } catch (error) {
                 console.error("Error en la solicitud a la API:", error);
