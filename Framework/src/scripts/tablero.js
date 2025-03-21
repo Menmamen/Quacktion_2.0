@@ -60,20 +60,23 @@ function girarRuleta() {
     setTimeout(() => {
         const anguloFinal = anguloActual % 360;
         const segmentoSeleccionado = Math.floor(((360 - anguloFinal) % 360) / (360 / 20));
-        let categoriaSeleccionada = categorias[segmentoSeleccionado % categorias.length];
+        const categoriaSeleccionada = categorias[segmentoSeleccionado % 6]; 
+
+        console.log("Ángulo final:", anguloFinal);
+        console.log("Segmento seleccionado:", segmentoSeleccionado);
+        console.log("Categoría seleccionada:", categoriaSeleccionada);
 
         resultado.innerText = `Categoría: ${categoriaSeleccionada.nombre}`;
 
-        // **OBTENER ID DE LA CATEGORÍA**
         let categoriaID = asignarCategoria(categoriaSeleccionada.nombre);
+        console.log("ID de categoría asignado:", categoriaID);
 
-        // **PEDIR PREGUNTAS A LA API SIEMPRE QUE SE GIRA**
         obtenerPreguntasTrivia(1, categoriaID)
             .then(preguntas => {
                 if (preguntas && preguntas.length > 0) {
                     setTimeout(() => {
-                        renderPregunta(preguntas[0]); // Mostrar la nueva pregunta
-                    }, 500); // Espera medio segundo antes de mostrar la pregunta
+                        renderPregunta(preguntas[0]);
+                    }, 500);
                 } else {
                     console.error("No se obtuvieron preguntas.");
                 }
@@ -81,6 +84,7 @@ function girarRuleta() {
             .catch(error => console.error("Error obteniendo preguntas:", error));
     }, 3000);
 }
+
 
 
 
@@ -95,22 +99,15 @@ function jugar() {//Lógica de juego
 
     }
 }
-async function obtenerPreguntasTrivia(cantidad = 1, categoria = null, dificultad = null, tipo = "multiple") {
-    const categorias = {
-        "General Knowledge": 9, "Entertainment: Books": 10, "Entertainment: Films": 11, "Entertainment: Music": 12,
-        "Entertainment: Musicals & Theatres": 13, "Entertainment: Television": 14, "Entertainment: Video Games": 15,
-        "Entertainment: Board Games": 16, "Science & Nature": 17, "Science: Computers": 18, "Science: Mathematics": 19,
-        "Mythology": 20, "Sports": 21, "Geography": 22, "History": 23, "Politics": 24, "Art": 25, "Celebrities": 26,
-        "Animals": 27, "Vehicles": 28, "Entertainment: Comics": 29, "Science: Gadgets": 30, "Entertainment: Japanese Anime & Manga": 31,
-        "Entertainment: Cartoon & Animations": 32
-    };
-
+async function obtenerPreguntasTrivia(cantidad = 1, categoriaID = null, dificultad = null, tipo = "multiple") {
     const tipos = { "multiple": "multiple", "verdadero_falso": "boolean" };
 
     let url = `https://opentdb.com/api.php?amount=${cantidad}&encode=base64`;
-    if (categoria && categorias[categoria]) url += `&category=${categorias[categoria]}`;
+    if (categoriaID) url += `&category=${categoriaID}`;
     if (dificultad && ["easy", "medium", "hard"].includes(dificultad)) url += `&difficulty=${dificultad}`;
     if (tipo && tipos[tipo]) url += `&type=${tipos[tipo]}`;
+
+    console.log("URL de la API:", url); // Agregado para depuración
 
     try {
         const response = await fetch(url);
@@ -131,6 +128,7 @@ async function obtenerPreguntasTrivia(cantidad = 1, categoria = null, dificultad
         return null;
     }
 }
+
 
 // Uso de la función
 // obtenerPreguntasTrivia(2, "Science: Computers", "easy", "multiple").then(console.log);
