@@ -7,7 +7,12 @@ $num_jugadores = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['num_jugadores'])) {
         $num_jugadores = intval($_POST['num_jugadores']);
-        $_SESSION['num_jugadores'] = $num_jugadores;
+        if ($num_jugadores < 1) {
+            $mensaje = "El número de jugadores debe ser al menos 1.";
+            $msgClass = "error-message";
+        } else {
+            $_SESSION['num_jugadores'] = $num_jugadores;
+        }
     } elseif (isset($_POST['jugador_1'])) {
         $nombres_jugadores = [];
         for ($i = 1; $i <= $_SESSION['num_jugadores']; $i++) {
@@ -199,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Introduce el número de jugadores</h1>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="num_jugadores" name="num_jugadores" placeholder="Número de Jugadores" required>
+                    <input type="number" class="form-control" id="num_jugadores" name="num_jugadores" placeholder="Número de Jugadores" min="1" required>
                 </div>
 
                 <button class="btn btn-custom btn-primary" type="submit">Siguiente</button>
