@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         $_SESSION['nombres_jugadores'] = $nombres_jugadores;
-        header("Location: main.php");
+        header("Location: ./tablero.php");
         exit();
     } else {
         $mensaje = "Por favor, ingrese el número de jugadores.";

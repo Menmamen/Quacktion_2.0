@@ -17,7 +17,7 @@ const categorias = [
 function crearRuleta() {
     const numSegmentos = 20;
     const anguloSegmento = 360 / numSegmentos;
-    const radio = 170; // Radio de la ruleta
+    const radio = 255; // Radio de la ruleta
 
     for (let i = 0; i < numSegmentos; i++) {
         const categoria = categorias[i % categorias.length];
@@ -38,11 +38,11 @@ function crearRuleta() {
 
         // Agregar icono
         const icono = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        icono.setAttribute("x", (x1 + x2) / 2 * 0.6);
-        icono.setAttribute("y", (y1 + y2) / 2 * 0.6);
+        icono.setAttribute("x", (x1 + x2) / 2 * 0.8);  // Más cerca del borde (antes 0.6)
+        icono.setAttribute("y", (y1 + y2) / 2 * 0.8);  // Más cerca del borde (antes 0.6)
         icono.setAttribute("text-anchor", "middle");
         icono.setAttribute("alignment-baseline", "middle");
-        icono.setAttribute("font-size", "20");
+        icono.setAttribute("font-size", "28");  // Iconos más grandes (antes 20)
         icono.setAttribute("fill", "white");
         icono.textContent = categoria.icono;
         ruleta.appendChild(icono);
@@ -137,6 +137,8 @@ function renderPregunta(preguntaData) {
     const preguntaContainer = document.getElementById('pregunta-container');
     const preguntaTexto = document.getElementById('pregunta-texto');
     const opcionesDiv = document.getElementById('opciones');
+    const botonRuleta = document.getElementById("boton-girar");
+    const flecha = document.getElementById("flecha");
 
     // **LIMPIAR CONTENIDO ANTES DE AGREGAR LA NUEVA PREGUNTA**
     preguntaTexto.innerText = "";
@@ -144,8 +146,13 @@ function renderPregunta(preguntaData) {
 
     // Asegurar que la ruleta desaparece y la pregunta se muestra
     ruleta.style.opacity = "0";
+    botonRuleta.style.opacity = "0";
+    flecha.style.opacity = "0";
+
     setTimeout(() => {
         ruleta.style.display = 'none';
+        botonRuleta.style.display = 'none';
+        flecha.style.display = 'none';
         preguntaContainer.style.display = 'block';
         preguntaContainer.style.opacity = "1";
 
@@ -169,8 +176,9 @@ function renderPregunta(preguntaData) {
 
 
 function responderPregunta(respuestaUsuario, respuestaCorrecta) {
-    const preguntaContainer = document.getElementById('pregunta-container'); // Asegurar que se obtiene el elemento
+    const preguntaContainer = document.getElementById('pregunta-container');
     const ruleta = document.getElementById('ruleta');
+    const botonRuleta = document.getElementById("boton-girar");
     const botones = document.querySelectorAll("#opciones button");
 
     // Desactivar todos los botones después de la selección
@@ -185,32 +193,34 @@ function responderPregunta(respuestaUsuario, respuestaCorrecta) {
         }
     });
 
-    // **Esperar 2 segundos y volver a mostrar la ruleta para una nueva pregunta**
+    // **Esperar 2 segundos y volver a mostrar la ruleta y el botón**
     setTimeout(() => {
         preguntaContainer.style.opacity = "0"; // Desvanecer pregunta
 
         setTimeout(() => {
             preguntaContainer.style.display = 'none';
+
+            // Asegurar que la ruleta y el botón están visibles antes de cambiar opacidad
             ruleta.style.display = 'block';
-            ruleta.style.opacity = "0";
+            botonRuleta.style.display = 'block';
+            flecha.style.display = 'block';
 
             setTimeout(() => {
                 ruleta.style.opacity = "1"; // Animación de aparición
-                setTimeout(() => {
-                    girarRuleta(); // **VOLVER A GIRAR AUTOMÁTICAMENTE**
-                }, 500);
-            }, 100);
+                botonRuleta.style.opacity = "1"; // Hacer que el botón aparezca con la ruleta
+                flecha.style.opacity = "1"; // Hacer que la flecha aparezca con la ruleta
+            }, 50); // Pequeño retraso para que `display: block` se aplique correctamente
+
         }, 500);
     }, 2000);
 }
 
 
 
-
 crearRuleta();
 
 
-console.log(girarRuleta());
+/* console.log(girarRuleta()); */
 //console.log(obtenerPreguntasTrivia());
 
 function asignarCategoria(nombreCategoria) {

@@ -37,8 +37,8 @@
 
         .ruleta-container {
             position: relative;
-            width: 350px;
-            height: 350px;
+            width: 525px;
+            height: 525px;
         }
 
         .ruleta {
@@ -55,11 +55,15 @@
             transform: translate(-50%, -50%);
             background: white;
             border-radius: 50%;
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            /* Antes 80px */
+            height: 120px;
+            /* Antes 80px */
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 18px;
+            /* Asegura que el texto sea proporcional */
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -78,7 +82,7 @@
         /* Flecha indicadora */
         .flecha {
             position: absolute;
-            top: -30px;
+            top: -45px;
             /* La punta apunta a la ruleta */
             left: 50%;
             transform: translateX(-50%);
@@ -93,6 +97,26 @@
 
         .btn {
             background-color: #F3F3F3;
+        }
+
+        #pregunta-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #pregunta-texto {
+            color: #007bff;
         }
     </style>
 </head>
@@ -111,17 +135,17 @@
 
     <!-- Ruleta -->
     <div class="ruleta-container">
-        <div class="flecha"></div>
-        <svg class="ruleta" id="ruleta" width="350" height="350" viewBox="-175 -175 350 350">
+        <div class="flecha" id="flecha"></div>
+        <svg class="ruleta" id="ruleta" width="350" height="350" viewBox="-262.5 -262.5 525 525">
             <!-- Generación de las secciones con JavaScript -->
         </svg>
-        <button class="boton-girar" onclick="girarRuleta()">GIRAR</button>
+        <button class="boton-girar" id="boton-girar" onclick="girarRuleta()">GIRAR</button>
     </div>
 
     <div id="pregunta-container" class="container text-center p-4 rounded shadow-lg bg-light" style="display: none; opacity: 0; max-width: 600px; margin: auto;">
-    <h2 id="pregunta-texto" class="mb-4 text-primary"></h2>
-    <div id="opciones" class="d-flex flex-column gap-2"></div>
-</div>
+        <h2 id="pregunta-texto" class="mb-4 text-primary"></h2>
+        <div id="opciones" class="d-flex flex-column gap-2"></div>
+    </div>
 
     </div>
 
