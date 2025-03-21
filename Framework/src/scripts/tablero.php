@@ -106,7 +106,8 @@
         <a href="./index.php" class="btn btn-light my-2 rounded-5 border-dark">Log in</a>
         <!-- <button class="btn btn-light my-2 rounded-5 border-dark">Nueva Partida</button>
         <button class="btn btn-light my-2 rounded-5 border-dark">Reiniciar Partida</button>
-   -->  </div>
+   -->
+    </div>
 
     <!-- Ruleta -->
     <div class="ruleta-container">
@@ -116,6 +117,14 @@
         </svg>
         <button class="boton-girar" onclick="girarRuleta()">GIRAR</button>
     </div>
+
+    <div id="pregunta-container" class="container text-center p-4 rounded shadow-lg bg-light" style="display: none; opacity: 0; max-width: 600px; margin: auto;">
+    <h2 id="pregunta-texto" class="mb-4 text-primary"></h2>
+    <div id="opciones" class="d-flex flex-column gap-2"></div>
+</div>
+
+    </div>
+
 
     <div id="resultado"></div>
 
