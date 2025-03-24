@@ -1,9 +1,17 @@
 "use strict"
 
-
 const numPretuntas = 20;
 const ruleta = document.getElementById('ruleta');
 const resultado = document.getElementById('resultado');
+
+let puntuacion = {
+    "Historia": false,
+    "Geografía": false,
+    "Ciencia": false,
+    "Entretenimiento": false,
+    "Conocimiento general": false,
+    "Arte y Literatura": false
+};
 
 const categorias = [
     { color: '#E57373', nombre: 'Historia', icono: '🕰️' },
@@ -86,9 +94,7 @@ function girarRuleta() {
 }
 
 
-
-
-function jugar() {//Lógica de juego
+function jugar() { // Lógica de juego
     let correctas = 0;
     let incorrectas = 0;
     let categoria = resultado.innerText;
@@ -96,9 +102,9 @@ function jugar() {//Lógica de juego
 
     while (continuar) {
 
-
     }
 }
+
 async function obtenerPreguntasTrivia(cantidad = 1, categoriaID = null, dificultad = null, tipo = "multiple") {
     const tipos = { "multiple": "multiple", "verdadero_falso": "boolean" };
 
@@ -129,7 +135,6 @@ async function obtenerPreguntasTrivia(cantidad = 1, categoriaID = null, dificult
     }
 }
 
-
 // Uso de la función
 // obtenerPreguntasTrivia(2, "Science: Computers", "easy", "multiple").then(console.log);
 
@@ -140,7 +145,7 @@ function renderPregunta(preguntaData) {
     const botonRuleta = document.getElementById("boton-girar");
     const flecha = document.getElementById("flecha");
 
-    // **LIMPIAR CONTENIDO ANTES DE AGREGAR LA NUEVA PREGUNTA**
+    // *LIMPIAR CONTENIDO ANTES DE AGREGAR LA NUEVA PREGUNTA*
     preguntaTexto.innerText = "";
     opcionesDiv.innerHTML = "";
 
@@ -156,10 +161,10 @@ function renderPregunta(preguntaData) {
         preguntaContainer.style.display = 'block';
         preguntaContainer.style.opacity = "1";
 
-        // **Mostrar la pregunta**
+        // *Mostrar la pregunta*
         preguntaTexto.innerText = preguntaData.question;
 
-        // **Crear botones para las respuestas**
+        // *Crear botones para las respuestas*
         const respuestas = [preguntaData.correct_answer, ...preguntaData.incorrect_answers];
         respuestas.sort(() => Math.random() - 0.5); // Mezclar opciones
 
@@ -167,61 +172,96 @@ function renderPregunta(preguntaData) {
             const boton = document.createElement("button");
             boton.innerText = respuesta;
             boton.className = "btn btn-primary text-dark m-2"; // Texto negro
-            boton.onclick = () => responderPregunta(respuesta, preguntaData.correct_answer);
+
+            // Asignar un atributo de control al botón correcto
+            if (respuesta === preguntaData.correct_answer) {
+                boton.dataset.correct = "true";
+            }
+
+            // Se pasa el botón clicado (this) para evaluar sin recorrer todas las opciones
+            boton.onclick = function() {
+                responderPregunta(this, respuesta, preguntaData.correct_answer);
+            };
             opcionesDiv.appendChild(boton);
         });
     }, 500);
+    console.log(puntuacion);
+    
+}
+
+function comprobarGanar(puntuacion) {
+    let respuesta = false;
+    array.forEach(puntuacion => {
+        
+    });
 }
 
 
-
-function responderPregunta(respuestaUsuario, respuestaCorrecta) {
+function responderPregunta(botonClicado, respuestaUsuario, respuestaCorrecta) {
     const preguntaContainer = document.getElementById('pregunta-container');
     const ruleta = document.getElementById('ruleta');
     const botonRuleta = document.getElementById("boton-girar");
-    const botones = document.querySelectorAll("#opciones button");
+    const flecha = document.getElementById("flecha");
 
-    // Desactivar todos los botones después de la selección
-    botones.forEach(boton => {
-        boton.disabled = true;
-        if (boton.innerText === respuestaCorrecta) {
-            boton.classList.remove("btn-primary", "text-dark");
-            boton.classList.add("btn-success", "text-white"); // Respuesta correcta en verde con texto blanco
-        } else if (boton.innerText === respuestaUsuario) {
-            boton.classList.remove("btn-primary", "text-dark");
-            boton.classList.add("btn-danger", "text-white"); // Respuesta incorrecta en rojo con texto blanco
+    // 🟢 **Obtener la categoría actual del resultado mostrado en pantalla**
+    let categoriaActual = resultado.innerText.replace("Categoría: ", "").trim();
+
+    // Desactivar el botón clicado
+    botonClicado.disabled = true;
+
+    if (respuestaUsuario === respuestaCorrecta) {
+        botonClicado.classList.remove("btn-primary", "text-dark");
+        botonClicado.classList.add("btn-success", "text-white"); // ✅ Respuesta correcta en verde
+        // Actualizar la puntuación solo si la categoría aún no estaba ganada
+        puntuacion[categoriaActual] = true;
+        console.log(`✅ ¡Categoría conseguida!: ${categoriaActual}`, puntuacion);
+    } else {
+        // Si la respuesta es incorrecta, marcar el botón pulsado en rojo
+        botonClicado.classList.remove("btn-primary", "text-dark");
+        botonClicado.classList.add("btn-danger", "text-white"); // ❌ Respuesta incorrecta en rojo
+
+        // Marcar el botón correcto (sin recorrer todos los botones, se utiliza un selector directo)
+        const botonCorrecto = document.querySelector("#opciones button[data-correct='true']");
+        if (botonCorrecto) {
+            botonCorrecto.classList.remove("btn-primary", "text-dark");
+            botonCorrecto.classList.add("btn-success", "text-white");
         }
-    });
+    }
 
-    // **Esperar 2 segundos y volver a mostrar la ruleta y el botón**
+    // **Esperar 2 segundos antes de continuar**
     setTimeout(() => {
-        preguntaContainer.style.opacity = "0"; // Desvanecer pregunta
+        preguntaContainer.style.opacity = "0";
 
         setTimeout(() => {
             preguntaContainer.style.display = 'none';
-
-            // Asegurar que la ruleta y el botón están visibles antes de cambiar opacidad
             ruleta.style.display = 'block';
             botonRuleta.style.display = 'block';
             flecha.style.display = 'block';
 
             setTimeout(() => {
-                ruleta.style.opacity = "1"; // Animación de aparición
-                botonRuleta.style.opacity = "1"; // Hacer que el botón aparezca con la ruleta
-                flecha.style.opacity = "1"; // Hacer que la flecha aparezca con la ruleta
-            }, 50); // Pequeño retraso para que `display: block` se aplique correctamente
+                ruleta.style.opacity = "1";
+                botonRuleta.style.opacity = "1";
+                flecha.style.opacity = "1";
+
+                // 🏆 **Comprobar si ha ganado el juego**
+                if (Object.values(puntuacion).every(val => val)) {
+                    setTimeout(() => {
+                        alert("🎉 ¡Felicidades! Has ganado respondiendo correctamente a todas las categorías.");
+                        location.reload(); // 🔄 Reiniciar juego
+                    }, 500);
+                }
+
+            }, 50);
 
         }, 500);
-    }, 2000);
-}
 
+    }, 2000);
+    console.log("Respuesta del usuario:", puntuacion);
+}
 
 
 crearRuleta();
 
-
-/* console.log(girarRuleta()); */
-//console.log(obtenerPreguntasTrivia());
 
 function asignarCategoria(nombreCategoria) {
     let categoriaID;
@@ -251,5 +291,3 @@ function asignarCategoria(nombreCategoria) {
 
     return categoriaID;
 }
-
-

@@ -1,12 +1,12 @@
 <?php
-<<<<<<< HEAD
+// <<<<<<< HEAD
 header('Content-Type: application/json'); // Asegura que se devuelve JSON
 echo json_encode(["pregunta" => "¿Cuál es la capital de Francia?"]); // Prueba con esto
-function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad = null, $tipo = null) {
-=======
+// function obtenerPreguntasTrivia($cantidad = 10, $categoria = null, $dificultad = null, $tipo = null) {
+// =======
 
 function obtenerPreguntasTrivia($cantidad = 1, $categoria = null, $dificultad = null, $tipo = null) {
->>>>>>> cbe4457be4395ea2c4f392bf5d50195817bcd04a
+// >>>>>>> cbe4457be4395ea2c4f392bf5d50195817bcd04a
     // Mapeo de categorías en → ID de OpenTDB
     $categorias = [
         "General Knowledge" => 9, "Entertainment: Books" => 10, "Entertainment: Films" => 11, "Entertainment: Music" => 12, "Entertainment: Musicals & Theatres" => 13,
