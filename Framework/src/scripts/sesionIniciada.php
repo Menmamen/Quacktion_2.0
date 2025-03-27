@@ -164,6 +164,15 @@ if (isset($_SESSION['username'])) {
         <div>Quacktion 2025</div>
     </footer>
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let usuario = "<?php echo $_SESSION['username'] ?? ''; ?>";
+            if (usuario) {
+                localStorage.setItem("nombreUsuario", usuario);
+                console.log("Usuario guardado en localStorage:", localStorage.getItem("nombreUsuario"));
+            }
+        });
+    </script>
 </body>
 
 </html>
