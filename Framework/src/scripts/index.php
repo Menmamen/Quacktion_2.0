@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($result);
             if (password_verify($password, $row['password'])) {
                 $_SESSION['username'] = $username;
+                echo "<script>localStorage.setItem('nombreUsuario', '" . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "');</script>";
                 header("Location: /Framework/src/scripts/sesionIniciada.php");
                 exit();
             } else {
@@ -367,6 +368,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./scriptIconos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let usuarioGuardado = localStorage.getItem("nombreUsuario");
+            if (usuarioGuardado) {
+                console.log("Usuario guardado en localStorage:", usuarioGuardado);
+            }
+        });
+    </script>
 
 </body>
 

@@ -374,5 +374,5 @@ if (savedIcon) {
     // Si no hay icono guardado, se deja la imagen por defecto
     miniRuletaImage.src = "/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp";
 }
-let nombreGuardado = localStorage.getItem("nombreUsuario") || "Jugador"; // Puedes cambiar 'Jugador' por otro valor por defecto
+let nombreGuardado = localStorage.getItem("nombreUsuario") || "Jugador"; 
 document.getElementById("nombre-mini-ruleta").textContent = nombreGuardado;

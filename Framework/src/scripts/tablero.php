@@ -133,7 +133,7 @@
         }
 
         .btn {
-            background-color: rgb(236, 235, 228) !important;
+            background-color: rgb(236, 235, 228);
         }
 
         #pregunta-container {
