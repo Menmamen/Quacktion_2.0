@@ -208,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: white;
             font-size: 15px;
         }
+
         .btn-flotante {
             position: fixed;
             top: 10px;
@@ -223,6 +224,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 50%;
             cursor: pointer;
         }
+
+        /* Estilos para centrar completamente la ventana modal */
+        .modal-overlay {
+            display: none;
+            /* Debe estar oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            /* Esto NO debe estar aquí, se activará con JS */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Contenido centrado del modal */
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Contenedor de iconos */
+        #icon-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        /* Imágenes de selección de icono */
+        .icon-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .icon-preview:hover {
+            transform: scale(1.2);
+        }
+
+        /* Botón "Cerrar" con mismo estilo que "Cambiar Icono" */
+        .btn-gray {
+            background-color: #7a7a7a;
+            /* Gris medio */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn-gray:hover {
+            background-color: #5a5a5a;
+            /* Gris oscuro */
+            cursor: pointer;
+        }
+
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -231,8 +311,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <img src="/Framework/public/assets/img/quacktion.jpg" alt="Ir a main.php" title="Volver a Inicio">
     </a>
     <div class="container-login">
-        <!-- Icono centrado arriba -->
-        <img src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
+        <div class="icon-container">
+            <img id="icon-user" src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" class="icon-user" alt="Icono de Usuario">
+            <button id="btn-change-icon" class="btn btn-gray">Cambiar Icono</button>
+        </div>
+
+        <div id="icon-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <h2>Selecciona un Icono</h2>
+                <div id="icon-preview-container"></div>
+                <button id="btn-close-modal" class="btn-gray">Cerrar</button>
+            </div>
+        </div>
 
         <?php if ($mensaje): ?>
             <div class="<?php echo htmlspecialchars($msgClass); ?>">
@@ -276,6 +366,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./scriptIconos.js"></script>
+
 </body>
 
 </html>
