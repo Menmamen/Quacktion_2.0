@@ -2,6 +2,7 @@
 
 const numPretuntas = 20;
 const ruleta = document.getElementById('ruleta');
+const miniRuleta = document.getElementById('mini-ruleta');
 const resultado = document.getElementById('resultado');
 
 let puntuacion = {
@@ -68,7 +69,7 @@ function girarRuleta() {
     setTimeout(() => {
         const anguloFinal = anguloActual % 360;
         const segmentoSeleccionado = Math.floor(((360 - anguloFinal) % 360) / (360 / 20));
-        const categoriaSeleccionada = categorias[segmentoSeleccionado % 6]; 
+        const categoriaSeleccionada = categorias[segmentoSeleccionado % 6];
 
         console.log("Ángulo final:", anguloFinal);
         console.log("Segmento seleccionado:", segmentoSeleccionado);
@@ -179,20 +180,20 @@ function renderPregunta(preguntaData) {
             }
 
             // Se pasa el botón clicado (this) para evaluar sin recorrer todas las opciones
-            boton.onclick = function() {
+            boton.onclick = function () {
                 responderPregunta(this, respuesta, preguntaData.correct_answer);
             };
             opcionesDiv.appendChild(boton);
         });
     }, 500);
     console.log(puntuacion);
-    
+
 }
 
 function comprobarGanar(puntuacion) {
     let respuesta = false;
     array.forEach(puntuacion => {
-        
+
     });
 }
 
@@ -214,6 +215,7 @@ function responderPregunta(botonClicado, respuestaUsuario, respuestaCorrecta) {
         botonClicado.classList.add("btn-success", "text-white"); // ✅ Respuesta correcta en verde
         // Actualizar la puntuación solo si la categoría aún no estaba ganada
         puntuacion[categoriaActual] = true;
+        crearMiniRuleta();
         console.log(`✅ ¡Categoría conseguida!: ${categoriaActual}`, puntuacion);
     } else {
         // Si la respuesta es incorrecta, marcar el botón pulsado en rojo
@@ -246,8 +248,8 @@ function responderPregunta(botonClicado, respuestaUsuario, respuestaCorrecta) {
                 // 🏆 **Comprobar si ha ganado el juego**
                 if (Object.values(puntuacion).every(val => val)) {
                     setTimeout(() => {
-                        alert("🎉 ¡Felicidades! Has ganado respondiendo correctamente a todas las categorías.");
-                        location.reload(); // 🔄 Reiniciar juego
+                        const ventanaEmergente = document.getElementById('ventana-emergente');
+                        ventanaEmergente.style.display = 'block';
                     }, 500);
                 }
 
@@ -291,3 +293,70 @@ function asignarCategoria(nombreCategoria) {
 
     return categoriaID;
 }
+
+function crearMiniRuleta() {
+    const numSegmentos = 6;
+    const anguloSegmento = 360 / numSegmentos;
+    const radio = 60; // Tamaño de la miniruleta
+    const miniRuleta = document.getElementById('mini-ruleta'); // Asegúrate de tener el contenedor SVG
+
+    // Asegurarse de limpiar la ruleta antes de añadir los nuevos segmentos
+    miniRuleta.innerHTML = '';
+
+    for (let i = 0; i < numSegmentos; i++) {
+        const categoria = categorias[i]; // Usar las categorías del array 'categorias'
+        const anguloInicio = i * anguloSegmento;
+        const anguloFin = (i + 1) * anguloSegmento;
+
+        const x1 = Math.cos((anguloInicio - 90) * Math.PI / 180) * radio;
+        const y1 = Math.sin((anguloInicio - 90) * Math.PI / 180) * radio;
+        const x2 = Math.cos((anguloFin - 90) * Math.PI / 180) * radio;
+        const y2 = Math.sin((anguloFin - 90) * Math.PI / 180) * radio;
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+        // Si la categoría ha sido acertada, se le asigna el color de 'categorias', sino se deja sin color
+        const color = puntuacion[categoria.nombre] ? categoria.color : "#E0E0E0"; // Gris para los que no están acertados
+        path.setAttribute("d", `M 0 0 L ${x1} ${y1} A ${radio} ${radio} 0 0 1 ${x2} ${y2} Z`);
+        path.setAttribute("fill", color);
+        path.setAttribute("stroke", "white");
+        path.setAttribute("stroke-width", "2");
+
+        miniRuleta.appendChild(path);
+    }
+}
+
+
+crearMiniRuleta();
+
+// **Toggler Sidebar**
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('hidden');
+}
+
+// Funcionalidad para arrastrar la miniruleta
+const miniRuletaContainer = document.getElementById('mini-ruleta-container');
+
+let isDragging = false;
+let offsetX, offsetY;
+
+miniRuletaContainer.addEventListener('mousedown', (event) => {
+    isDragging = true;
+    offsetX = event.clientX - miniRuletaContainer.getBoundingClientRect().left;
+    offsetY = event.clientY - miniRuletaContainer.getBoundingClientRect().top;
+    miniRuletaContainer.style.cursor = 'grabbing'; // Cambiar el cursor cuando está arrastrando
+});
+
+document.addEventListener('mousemove', (event) => {
+    if (isDragging) {
+        const left = event.clientX - offsetX;
+        const top = event.clientY - offsetY;
+        miniRuletaContainer.style.left = `${left}px`;
+        miniRuletaContainer.style.top = `${top}px`;
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    miniRuletaContainer.style.cursor = 'move'; // Volver a cambiar el cursor a 'move'
+});
