@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruleta - Quacktion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+
     <style>
         body {
             background: rgba(16, 47, 49, 0.9) url("/Framework/public/assets/img/geese-removebg-preview.png") repeat;
@@ -131,7 +133,7 @@
         }
 
         .btn {
-            background-color:rgb(236, 235, 228) !important;
+            background-color: rgb(236, 235, 228) !important;
         }
 
         #pregunta-container {
@@ -154,33 +156,54 @@
             color: #007bff;
         }
 
-        /* Estilo para la miniruleta */
+        /* Contenedor de la miniruleta */
         #mini-ruleta-container {
             position: fixed;
             top: 10px;
             right: 10px;
-            width: 200px;
-            height: 200px;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: move;
-            /* Añadido para mostrar que se puede mover */
+            width: 250px;
+            height: 250px;
+            text-align: center;
         }
 
-        /* Imagen encima de la miniruleta */
+        /* Miniruleta */
+        #mini-ruleta {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            z-index: 2;
+            /* La miniruleta debe tener un z-index más alto para estar encima del nombre */
+        }
+
+        /* Imagen superpuesta sobre la miniruleta */
         #mini-ruleta-image {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            /* Borde circular */
             border: 5px solid white;
+            z-index: 3;
+            /* La imagen debe estar encima de la miniruleta */
         }
+
+        #nombre-mini-ruleta {
+            font-family: 'Bagel Fat One', sans-serif;
+            position: absolute;
+            top: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 25px;
+            font-weight: lighter;
+            width: 100%;
+            text-align: center;
+            z-index: 4;
+            text-transform: uppercase; 
+        }
+
 
         /* Para ocultar la barra lateral */
         .sidebar.hidden {
@@ -188,7 +211,7 @@
         }
 
         .toggle-btn {
-            background-color:rgb(236, 235, 228) !important;
+            background-color: rgb(236, 235, 228) !important;
             position: fixed;
             top: 0px;
             left: 0px;
@@ -311,6 +334,7 @@
         .contenido-ventana a:hover {
             background-color: #ddd;
         }
+
     </style>
 </head>
 
@@ -325,9 +349,9 @@
 
     <!-- Miniruleta arrastrable -->
     <div id="mini-ruleta-container">
-        <svg id="mini-ruleta" width="200" height="200" viewBox="-90 -90 180 180"></svg>
-        <!-- Imagen flotante encima de la miniruleta -->
         <img id="mini-ruleta-image" src="/Framework/public/assets/img/goose-head-v36-patch-streetwear-600nw-2201843891.webp" alt="Imagen de Miniruleta">
+        <svg id="mini-ruleta" width="200" height="200" viewBox="-90 -90 180 180"></svg>
+        <p id="nombre-mini-ruleta"></p>
     </div>
 
     <!-- Ruleta Principal -->

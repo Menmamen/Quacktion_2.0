@@ -331,6 +331,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./scriptIconos.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function() {
+            let nombreUsuario = document.querySelector("[id^='jugador_']").value.trim(); // Toma solo el primer jugador
+            
+            if (nombreUsuario) {
+                localStorage.setItem("nombreUsuario", nombreUsuario);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
